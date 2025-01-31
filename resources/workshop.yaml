@@ -54,7 +54,7 @@ spec:
                         - /bin/sh
                         - '-c'
                         - >
-                          ollama run llama3.1
+                          ollama run llama3.2:3b
                 ports:
                 - containerPort: 11434
                 resources:
