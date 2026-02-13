@@ -1,0 +1,13 @@
+# Real OpenAI Configuration
+# Requires OPENAI_API_KEY environment variable
+
+spring:
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        options:
+          model: gpt-4o
+
+logging.level:
+    org.springframework.ai: DEBUG

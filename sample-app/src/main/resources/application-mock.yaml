@@ -1,0 +1,17 @@
+# Mock OpenAI Configuration
+# Uses the embedded mock service for workshop exercises
+
+spring:
+  ai:
+    openai:
+      api-key: mock-api-key
+      base-url: http://localhost:8080/mock
+      chat:
+        options:
+          model: mock-gpt-4
+      embedding:
+        options:
+          model: mock-text-embedding-ada-002
+
+logging.level:
+  com.example.supportassistant.mock: DEBUG

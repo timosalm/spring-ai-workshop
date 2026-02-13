@@ -1,0 +1,11 @@
+spring:
+  application.name: support-assistant
+  profiles.active: mock
+
+logging.level:
+    com.example.supportassistant: INFO
+    org.springframework.ai: INFO
+
+management:
+  endpoints.web.exposure.include: health,info,metrics,prometheus
+  endpoint.health.show-details: always
