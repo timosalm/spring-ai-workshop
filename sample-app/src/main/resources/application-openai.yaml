@@ -7,7 +7,8 @@ spring:
       api-key: ${OPENAI_API_KEY}
       chat:
         options:
-          model: gpt-4o
-
+          model: gpt-5-nano
+          temperature: 1 # controls the randomness and creativity of AI-generated text. GPT-5 models don't support other temperature values than 1.
+      
 logging.level:
     org.springframework.ai: DEBUG
