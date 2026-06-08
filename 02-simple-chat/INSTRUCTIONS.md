@@ -448,14 +448,32 @@ Use the same logger you added in step 7. Try logging `chatResponse.getMetadata()
 
 The most interesting jump. Instead of free-form text, ask the model to return a Java type and let Spring AI handle both the prompting and the deserialization.
 
+First, create an enum for the category of the support request `src/main/java/com/example/support_assistant/SupportCategory.java`:
+```java
+package com.example.support_assistant;
+
+enum SupportCategory {
+    TECHNICAL,
+    BILLING,
+    SECURITY,
+    GENERAL
+}
+```
+
 Create `src/main/java/com/example/support_assistant/SupportResponse.java`:
 
 ```java
 package com.example.support_assistant;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
-record SupportResponse(String summary, List<String> keyPoints, List<String> docLinks) {}
+record SupportResponse(
+        @JsonPropertyDescription("The category of the support question: TECHNICAL, BILLING, SECURITY, UPGRADE, or GENERAL")
+        SupportCategory category,
+
+        @JsonPropertyDescription("The helpful answer to the customer's question")
+        String answer
+) { }
 ```
 
 Change `generateResponse` to return the record:
@@ -489,9 +507,8 @@ curl -G "http://localhost:8080/api/1.0/chat" \
 
 ```json
 {
-  "summary": "...",
-  "keyPoints": ["...", "..."],
-  "docLinks": ["..."]
+  "category": "...",
+  "answer": "..."
 }
 ```
 

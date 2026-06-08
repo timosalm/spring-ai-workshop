@@ -12,6 +12,7 @@ import java.util.Map;
 class SupportAssistantService {
 
     private static final Logger log = LoggerFactory.getLogger(SupportAssistantService.class);
+    
     private final ChatClient chatClient;
 
     SupportAssistantService(ChatClient chatClient) {
