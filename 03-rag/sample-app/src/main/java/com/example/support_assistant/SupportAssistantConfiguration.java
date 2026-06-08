@@ -5,10 +5,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class SupportAssistantConfiguration {
+class SupportAssistantConfiguration {
 
     @Bean
-    public ChatClient chatClient(ChatClient.Builder builder) {
+    ChatClient chatClient(ChatClient.Builder builder) {
         return builder.defaultSystem("You are a Spring and AI expert.").build();
     }
 }
