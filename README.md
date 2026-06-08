@@ -15,17 +15,6 @@ Built on **Spring AI 2.0**, **Spring Boot 4**, and **Java 25**.
 
 **A model provider** — pick one and set the matching environment variable. The default profile uses OpenAI; alternatives are provided as Spring profiles:
 
-| Provider | Profile | Environment variable(s) |
-|----------|---------|--------------------------|
-| OpenAI (default) | *(none)* | `OPENAI_API_KEY` |
-| Anthropic | `anthropic` | `ANTHROPIC_API_KEY` |
-| AWS Bedrock (Converse) | `bedrock-converse` | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN` |
-| Ollama (local) | `ollama` | *(none — runs models locally)* |
-
-Activate a non-default provider with, for example, `./mvnw spring-boot:run -Dspring-boot.run.profiles=anthropic`.
-
-**Background knowledge** — comfort with Java and Spring Boot (dependencies, auto-configuration, `application.properties`, beans). No prior AI/ML experience is needed; the fundamentals are covered in module 01.
-
 ## How the Workshop Is Structured
 
 The repository is a sequence of numbered modules. Work through them in order, each one builds directly on the application state left by the previous module.
@@ -41,7 +30,7 @@ spring-ai-workshop/
 ├── 02-simple-chat/                  ┐
 │   ├── README.md                    │  theory chapter
 │   ├── exercises.md                 │  step-by-step lab
-│   └── sample-app/                  │  runnable Spring Boot app (the lab's starting/solution code)
+│   └── sample-app/                  │  runnable Spring Boot app (the lab's starting code)
 │       ├── mvnw, pom.xml            │
 │       └── src/                     ┘
 ├── 03-rag/
@@ -49,11 +38,7 @@ spring-ai-workshop/
 ├── 05-testing/
 ├── 06-observability/
 ├── 07-mcp/
-│   └── sample-app/compose.yaml      ← Docker services (pgvector, observability)
 ├── 08-agent-patterns/
-│   ├── sample-app/
-│   └── spring-releases-mcp-server/  ← a second app: an MCP server the assistant connects to
-│
 └── 99-summary/                      ← recap + final consolidated sample-app
 ```
 
