@@ -4,7 +4,7 @@ Your assistant now has a growing set of tools: three in-process ticket tools plu
 
 That creates a problem: **every chat call sends the full tool schema to the model**, even when none of those tools can help. Every tool description costs tokens on every request, the model has more chances to pick the wrong tool, and the prompt grows as you add MCP servers.
 
-The fix is the **Tool Search Tool**: the model gets a single meta-tool, `searchTools`, plus an index that embeds every real tool's description into the vector store. When the model needs to act, it calls `searchTools` with a natural-language query, gets back the most relevant tools, and only those flow into the next turn. It's RAG, but for tools.
+The fix is the **Tool Search Tool**: the model gets a single meta-tool, `toolSearchTool`, plus an index that embeds every real tool's description into the vector store. When the model needs to act, it calls `toolSearchTool` with a natural-language query, gets back the most relevant tools, and only those flow into the next turn. It's RAG, but for tools.
 
 Your starting point is the [`sample-app/`](sample-app/), the MCP-connected assistant, plus the [`spring-releases-mcp-server/`](spring-releases-mcp-server/) from the previous lab.
 
@@ -50,7 +50,7 @@ import org.springframework.ai.tool.toolsearch.ToolIndex;
 import org.springframework.ai.tool.toolsearch.index.vectorstore.VectorToolIndex;
 ```
 
-On startup the auto-configuration goes through every available `ToolCallback` (in-process and MCP) and embeds its name and description into the index. From then on the model never sees those tools directly — it sees only `searchTools`.
+On startup the auto-configuration goes through every available `ToolCallback` (in-process and MCP) and embeds its name and description into the index. From then on the model never sees those tools directly — it sees only `toolSearchTool`.
 
 ## 4. Add the `ToolSearchToolCallingAdvisor`
 
@@ -86,7 +86,7 @@ Add the import:
 import org.springframework.ai.chat.client.advisor.toolsearch.ToolSearchToolCallingAdvisor;
 ```
 
-`maxResults(5)` injects the 5 most relevant tools per turn. Behind the scenes the advisor replaces the full tool list with just `searchTools`; when the model calls it, the advisor runs a similarity search against the `ToolIndex` and surfaces the matches on the next turn. The full list (`createTicket`, `retrieveTickets`, `retrieveOpenTickets`, `fetchReleasesInfo`, …) is no longer in every prompt.
+`maxResults(5)` injects the 5 most relevant tools per turn. Behind the scenes the advisor replaces the full tool list with just `toolSearchTool`; when the model calls it, the advisor runs a similarity search against the `ToolIndex` and surfaces the matches on the next turn. The full list (`createTicket`, `retrieveTickets`, `retrieveOpenTickets`, `fetchReleasesInfo`, …) is no longer in every prompt.
 
 The tool-search advisor is multi-turn (turn 1 searches, turn 2 acts), so it relies on the conversation memory already wired into the assistant.
 
@@ -98,12 +98,14 @@ Start the assistant. Send a request that needs a tool (no header, so a fresh con
 curl -G "http://localhost:8080/api/v1/chat" --data-urlencode "query=Please open a high-priority ticket: SSO login returns 502 on the Tanzu portal."
 ```
 
-With debug logging on you'll see: a first model call advertising only `searchTools`; the model calling it with the user's intent; the advisor returning the top 5 hits (with `createTicket` among them); then a second model call with only those tools, from which the model picks `createTicket`.
+With debug logging on you'll see: a first model call advertising only `toolSearchTool`; the model calling it with the user's intent; the advisor returning the top 5 hits (with `createTicket` among them; look for the `VectorToolIndex` log line `Indexed N tools for sessionId=...`); then a second model call with only those tools, from which the model picks `createTicket`.
+
+> Whether the model completes the action is model-dependent. The `toolSearchTool` discovery competes with the strict RAG grounding prompt (`rag-prompt.st`) and the forced structured output, and some models answer from the retrieved context and decline the action ("no ticket-creation tool is available…") instead of following the two-step search-then-act loop. The `VectorToolIndex` log lines confirm the advisor is wired correctly even when the model chooses not to act. If you hit this, phrase the request more explicitly as an action, or try a more capable model for the acting step.
 
 Now a multi-turn flow reusing the same id:
 
 ```bash
-CID=$(cat /proc/sys/kernel/random/uuid)
+CID=$(uuidgen)
 
 curl -G "http://localhost:8080/api/v1/chat" -H "X-Conversation-Id: $CID" \
      --data-urlencode "query=What's the latest release of Spring Boot?"
@@ -114,7 +116,7 @@ curl -G "http://localhost:8080/api/v1/chat" -H "X-Conversation-Id: $CID" \
 
 The second call sees the first turn's history, so "that version" resolves to the release just fetched, and the tool search advisor still picks the right action.
 
-Finally, a pure RAG question confirms tool search adds no overhead when no action is needed — the model never calls `searchTools`:
+Finally, a pure RAG question confirms tool search adds no overhead when no action is needed — the model never calls `toolSearchTool`:
 
 ```bash
 curl -G "http://localhost:8080/api/v1/chat" --data-urlencode "query=What is Tanzu Spring Runtime?"

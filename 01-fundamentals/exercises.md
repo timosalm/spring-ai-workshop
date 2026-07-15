@@ -1,8 +1,32 @@
 # Fundamentals — Hands-on Exercises
 
-Your starting point is the minimal Spring Boot app in [`sample-app/`](sample-app/). It already ships the dependencies you need (Spring Web, Actuator, the Spring AI OpenAI starter, and DevTools) plus the Spring AI BOM. Over these steps you build the support assistant up from a single model call to a structured, memory-aware `ChatClient` with advisors.
+Your starting point is the minimal Spring Boot app in [`sample-app/`](sample-app/), which is created with the following command:
+```bash
+curl https://start.spring.io/starter.zip \
+  -d dependencies=web,actuator,spring-ai-openai,devtools \
+  -d bootVersion=4.1.0 \
+  -d type=maven-project \
+  -d groupId=com.example \
+  -d artifactId=support-assistant \
+  -d javaVersion=21 \
+  -o sample-app.zip
+```
 
-Each step is a small change. Restart the app (DevTools restarts on a recompile) and `curl` between steps to see the effect.
+It ships the dependencies you need (Spring Web, Actuator, the Spring AI OpenAI starter, and DevTools) plus the Spring AI BOM. Over these steps you build the support assistant up from a single model call to a structured, memory-aware `ChatClient` with advisors.
+
+It already includes some configuration. The three `spring.mvc.apiversion.*` lines enable path-segment API versioning. This is a new feature in Spring Framework 7 and Spring Boot 4. You will use it for your REST endpoints, such as `/api/v1/...`.
+
+The `spring.devtools.restart.enabled=true` turns on the Spring Boot Developer Tools automatic restart. So each step is a small change, a restart of the app (DevTools restarts on a recompile) and `curl` between steps to see the effect.
+
+```properties
+spring.application.name=support-assistant
+
+spring.devtools.restart.enabled=true
+
+spring.mvc.apiversion.use.path-segment=1
+spring.mvc.apiversion.supported=1.0
+spring.mvc.apiversion.default=1.0
+```
 
 > The examples use **OpenAI**. To use another provider, swap the starter and the `spring.ai.<provider>.*` properties accordingly.
 
@@ -305,6 +329,17 @@ The model only ever returns text. To get reliable, structured data you need to g
 ### Prompt engineering (by hand)
 
 You can steer the model to JSON with **few-shot prompting**. The braces in the prompt would be read as template variables, so use the plain `.system(String)` method. Update `generateResponse`:
+
+The logger was dropped when you switched to `ChatClient` in step 3, so re-add the field and its imports to the service:
+
+```java
+private static final Logger log = LoggerFactory.getLogger(SupportAssistantService.class);
+```
+
+```java
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+```
 
 ```java
 String generateResponse(String query) {

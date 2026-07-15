@@ -63,7 +63,25 @@ curl -s http://localhost:8080/actuator/metrics | jq
 curl -s http://localhost:8080/actuator/metrics/gen_ai.client.token.usage | jq
 ```
 
-The response breaks down `input` vs `output` tokens — the numbers that drive cost. Also try `gen_ai.client.operation` (chat latency) and `spring.ai.vector.store.client.operation` (vector-store timings). The names follow the OpenTelemetry GenAI semantic conventions, with tags like `gen_ai.system`, `gen_ai.request.model`, `gen_ai.operation.name`, and `gen_ai.token.type`.
+The response breaks down `input` vs `output` tokens — the numbers that drive cost. Also try `gen_ai.client.operation` (chat latency). The names follow the OpenTelemetry GenAI semantic conventions, with tags like `gen_ai.system`, `gen_ai.request.model`, `gen_ai.operation.name`, and `gen_ai.token.type`.
+
+For vector-store timings the metric is `db.vector.client.operation` (following the OpenTelemetry DB semantic conventions, with tags like `db.system`, `db.operation.name`, and `spring.ai.kind`). The in-memory `SimpleVectorStore` only records it when its bean is built with the application's `ObservationRegistry`, so update the `simpleVectorStore` bean in `SupportAssistantConfiguration` to inject and pass it:
+
+```java
+@ConditionalOnMissingBean(VectorStore.class)
+@Bean
+VectorStore simpleVectorStore(EmbeddingModel embeddingModel, ObservationRegistry observationRegistry) {
+    return SimpleVectorStore.builder(embeddingModel).observationRegistry(observationRegistry).build();
+}
+```
+
+Add the import:
+
+```java
+import io.micrometer.observation.ObservationRegistry;
+```
+
+After a restart and a RAG query, `curl -s http://localhost:8080/actuator/metrics/db.vector.client.operation | jq` shows the timings.
 
 Inspect the Prometheus endpoint too:
 

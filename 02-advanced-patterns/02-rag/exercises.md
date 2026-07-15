@@ -199,7 +199,7 @@ You'll get a refusal like *"I can't answer that from the provided context …"*.
 
 Override the advisor's prompt with your own template. The two placeholders are filled by the advisor: `{query}` with the user's question, `{question_answer_context}` with the retrieved chunks.
 
-Create `src/main/resources/prompts/rag.st`:
+Create `src/main/resources/prompts/rag-prompt.st`:
 
 ```
 Use the following retrieved context to answer the user's question. Follow these rules:
@@ -221,7 +221,7 @@ Question:
 Inject the resource into the service and pass it to the advisor as a `PromptTemplate`. Add a field:
 
 ```java
-@Value("classpath:/prompts/rag.st")
+@Value("classpath:/prompts/rag-prompt.st")
 private Resource ragPromptResource;
 ```
 

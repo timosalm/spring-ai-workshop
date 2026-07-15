@@ -183,6 +183,8 @@ curl -G "http://localhost:8080/api/v1/chat" --data-urlencode "query=What is the 
 
 The logs show the model making a `fetchReleasesInfo` tool call with `{"projectSlug": "spring-boot"}`, and the result fed back for the final answer.
 
+> If the model instead answers with a refusal ("I can't determine the latest release from the provided context…") and skips the tool, that's the strict RAG grounding prompt (`rag-prompt.st`) steering it to answer only from the retrieved Tanzu docs. It's a good illustration of how a grounding prompt and tool calling can pull against each other for purely informational questions. Phrasing the request as an explicit action (as in the combined query below) reliably triggers the remote tool.
+
 Try one turn that uses both the remote MCP tool and an in-process tool:
 
 ```bash
