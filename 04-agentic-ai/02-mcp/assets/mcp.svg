@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 820" font-family="'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="arrowBlue" markerWidth="9" markerHeight="9" refX="7.5" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0.5,0.5 L8,4 L0.5,7.5" fill="none" stroke="#7a8896" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrowBlueStart" markerWidth="9" markerHeight="9" refX="1.5" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M8.5,0.5 L1,4 L8.5,7.5" fill="none" stroke="#7a8896" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="2000" height="820" fill="#ffffff"/>
+
+  <!-- ===== Left column: AI applications ===== -->
+  <g>
+    <!-- Box 1 -->
+    <rect x="70" y="70" width="470" height="150" rx="18" fill="#ffffff" stroke="#2b6a8f" stroke-width="3"/>
+    <text x="305" y="132" text-anchor="middle" font-size="34" font-weight="700" fill="#1c3d5a">Chat interfaces</text>
+    <text x="305" y="176" text-anchor="middle" font-size="26" fill="#5b6b7a">Claude Desktop, ChatGPT, LibreChat</text>
+    <!-- Box 2 -->
+    <rect x="70" y="300" width="470" height="150" rx="18" fill="#ffffff" stroke="#2b6a8f" stroke-width="3"/>
+    <text x="305" y="362" text-anchor="middle" font-size="34" font-weight="700" fill="#1c3d5a">IDEs and code editors</text>
+    <text x="305" y="406" text-anchor="middle" font-size="26" fill="#5b6b7a">GitHub Copilot, Claude Code, Cursor</text>
+    <!-- Box 3 -->
+    <rect x="70" y="530" width="470" height="150" rx="18" fill="#ffffff" stroke="#2b6a8f" stroke-width="3"/>
+    <text x="305" y="592" text-anchor="middle" font-size="34" font-weight="700" fill="#1c3d5a">Other AI applications</text>
+    <text x="305" y="636" text-anchor="middle" font-size="26" fill="#5b6b7a">Your Spring AI app</text>
+    <!-- Column label -->
+    <text x="305" y="762" text-anchor="middle" font-size="27" font-weight="600" fill="#7a8896">AI applications</text>
+  </g>
+
+  <!-- ===== Right column: Data sources and tools ===== -->
+  <g>
+    <rect x="1460" y="70" width="470" height="150" rx="18" fill="#ffffff" stroke="#6aa84f" stroke-width="3"/>
+    <text x="1695" y="132" text-anchor="middle" font-size="34" font-weight="700" fill="#1c3d5a">Data and file systems</text>
+    <text x="1695" y="176" text-anchor="middle" font-size="26" fill="#5b6b7a">PostgreSQL, SQLite, GDrive</text>
+
+    <rect x="1460" y="300" width="470" height="150" rx="18" fill="#ffffff" stroke="#6aa84f" stroke-width="3"/>
+    <text x="1695" y="362" text-anchor="middle" font-size="34" font-weight="700" fill="#1c3d5a">Development tools</text>
+    <text x="1695" y="406" text-anchor="middle" font-size="26" fill="#5b6b7a">Git, Sentry, etc.</text>
+
+    <rect x="1460" y="530" width="470" height="150" rx="18" fill="#ffffff" stroke="#6aa84f" stroke-width="3"/>
+    <text x="1695" y="592" text-anchor="middle" font-size="34" font-weight="700" fill="#1c3d5a">Productivity tools</text>
+    <text x="1695" y="636" text-anchor="middle" font-size="26" fill="#5b6b7a">Slack, Google Maps, etc.</text>
+
+    <text x="1695" y="762" text-anchor="middle" font-size="27" font-weight="600" fill="#7a8896">Data sources and tools</text>
+  </g>
+
+  <!-- ===== Arrows left column -> center ===== -->
+  <g stroke="#7a8896" stroke-width="3" fill="none" marker-start="url(#arrowBlueStart)" marker-end="url(#arrowBlue)">
+    <path d="M540,145 C640,145 660,340 830,355"/>
+    <path d="M540,375 C660,375 700,400 830,400"/>
+    <path d="M540,605 C640,605 660,460 830,445"/>
+  </g>
+
+  <!-- ===== Arrows center -> right column ===== -->
+  <g stroke="#7a8896" stroke-width="3" fill="none" marker-start="url(#arrowBlueStart)" marker-end="url(#arrowBlue)">
+    <path d="M1170,355 C1340,340 1360,145 1460,145"/>
+    <path d="M1170,400 C1300,400 1340,375 1460,375"/>
+    <path d="M1170,445 C1340,460 1360,605 1460,605"/>
+  </g>
+
+  <!-- Bidirectional data flow labels -->
+  <text x="690" y="700" text-anchor="middle" font-size="23" fill="#7a8896">Bidirectional</text>
+  <text x="690" y="730" text-anchor="middle" font-size="23" fill="#7a8896">data flow</text>
+  <text x="1310" y="700" text-anchor="middle" font-size="23" fill="#7a8896">Bidirectional</text>
+  <text x="1310" y="730" text-anchor="middle" font-size="23" fill="#7a8896">data flow</text>
+
+  <!-- ===== Center MCP box ===== -->
+  <rect x="830" y="310" width="340" height="180" rx="22" fill="#e3eef5" stroke="#2b6a8f" stroke-width="3.5"/>
+  <text x="1000" y="392" text-anchor="middle" font-size="52" font-weight="800" fill="#1c3d5a">MCP</text>
+  <text x="1000" y="438" text-anchor="middle" font-size="26" fill="#3f5468">Standardized protocol</text>
+</svg>

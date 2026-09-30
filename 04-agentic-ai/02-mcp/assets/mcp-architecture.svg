@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 760" font-family="'Helvetica Neue', Arial, sans-serif">
+  <rect x="0" y="0" width="2000" height="760" fill="#ffffff"/>
+
+  <!-- ===== Connections (drawn first, behind boxes) ===== -->
+  <g stroke="#7a8896" stroke-width="3" fill="none" stroke-linecap="round">
+    <path d="M400,300 L400,520"/>
+    <path d="M1000,300 C1000,420 1230,410 1230,520"/>
+    <path d="M1600,300 C1600,420 1370,410 1370,520"/>
+  </g>
+
+  <!-- Dedicated connection labels -->
+  <g>
+    <g>
+      <rect x="296" y="368" width="208" height="70" rx="8" fill="#eef1f4"/>
+      <text x="400" y="398" text-anchor="middle" font-size="24" fill="#5b6b7a">Dedicated</text>
+      <text x="400" y="426" text-anchor="middle" font-size="24" fill="#5b6b7a">connection</text>
+    </g>
+    <g>
+      <rect x="986" y="368" width="208" height="70" rx="8" fill="#eef1f4"/>
+      <text x="1090" y="398" text-anchor="middle" font-size="24" fill="#5b6b7a">Dedicated</text>
+      <text x="1090" y="426" text-anchor="middle" font-size="24" fill="#5b6b7a">connection</text>
+    </g>
+    <g>
+      <rect x="1386" y="368" width="208" height="70" rx="8" fill="#eef1f4"/>
+      <text x="1490" y="398" text-anchor="middle" font-size="24" fill="#5b6b7a">Dedicated</text>
+      <text x="1490" y="426" text-anchor="middle" font-size="24" fill="#5b6b7a">connection</text>
+    </g>
+  </g>
+
+  <!-- ===== MCP Host container ===== -->
+  <rect x="60" y="90" width="1880" height="250" rx="22" fill="#f4f8fb" stroke="#2b6a8f" stroke-width="3"/>
+  <text x="1000" y="140" text-anchor="middle" font-size="32" font-weight="700" fill="#1c3d5a">MCP Host (AI application)</text>
+
+  <!-- Client boxes -->
+  <g>
+    <rect x="230" y="180" width="340" height="120" rx="16" fill="#e3eef5" stroke="#2b6a8f" stroke-width="2.5"/>
+    <text x="400" y="252" text-anchor="middle" font-size="30" font-weight="700" fill="#1c3d5a">MCP Client 1</text>
+
+    <rect x="830" y="180" width="340" height="120" rx="16" fill="#e3eef5" stroke="#2b6a8f" stroke-width="2.5"/>
+    <text x="1000" y="252" text-anchor="middle" font-size="30" font-weight="700" fill="#1c3d5a">MCP Client 2</text>
+
+    <rect x="1430" y="180" width="340" height="120" rx="16" fill="#e3eef5" stroke="#2b6a8f" stroke-width="2.5"/>
+    <text x="1600" y="252" text-anchor="middle" font-size="30" font-weight="700" fill="#1c3d5a">MCP Client 3</text>
+  </g>
+
+  <!-- ===== Server boxes ===== -->
+  <g>
+    <rect x="180" y="520" width="440" height="160" rx="18" fill="#ffffff" stroke="#6aa84f" stroke-width="3"/>
+    <text x="400" y="588" text-anchor="middle" font-size="30" font-weight="700" fill="#1c3d5a">MCP Server A (local)</text>
+    <text x="400" y="630" text-anchor="middle" font-size="25" fill="#5b6b7a">e.g. filesystem</text>
+
+    <rect x="1080" y="520" width="440" height="160" rx="18" fill="#ffffff" stroke="#6aa84f" stroke-width="3"/>
+    <text x="1300" y="588" text-anchor="middle" font-size="30" font-weight="700" fill="#1c3d5a">MCP Server B (remote)</text>
+    <text x="1300" y="630" text-anchor="middle" font-size="25" fill="#5b6b7a">e.g. GitHub</text>
+  </g>
+</svg>

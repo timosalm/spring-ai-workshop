@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" font-family="'Helvetica Neue', Arial, sans-serif">
+  <rect x="0" y="0" width="1400" height="900" fill="#ffffff"/>
+
+  <!-- ===== nested fields, largest to smallest ===== -->
+  <g stroke="#2b6a8f" stroke-width="3">
+    <ellipse cx="700" cy="440" rx="650" ry="410" fill="#f4f8fb"/>
+    <ellipse cx="700" cy="540" rx="500" ry="310" fill="#e3eef5"/>
+    <ellipse cx="700" cy="635" rx="350" ry="215" fill="#cfe2ee"/>
+    <ellipse cx="700" cy="745" rx="175" ry="105" fill="#b3d3e6"/>
+  </g>
+
+  <!-- ===== labels ===== -->
+  <g text-anchor="middle" fill="#1c3d5a" font-weight="700">
+    <text x="700" y="150" font-size="50">Artificial Intelligence</text>
+    <text x="700" y="342" font-size="44">Machine Learning</text>
+    <text x="700" y="532" font-size="38">Deep Learning</text>
+    <text x="700" y="722" font-size="32">Generative</text>
+    <text x="700" y="766" font-size="32">AI</text>
+  </g>
+</svg>

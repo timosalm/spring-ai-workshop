@@ -1,19 +1,22 @@
 # Building AI Applications with Spring AI
 
-A hands-on workshop for Java developers. Over a series of modules you incrementally build a **support assistant for VMware Tanzu Spring**, an application that answers questions from documentation, creates support tickets, maintains conversation history, and eventually reaches external services and discovers its own tools. Each module pairs focused theory chapters with practical labs, so you understand *why* before you build.
+A hands-on workshop for Java developers. Over a series of modules you build a **support assistant for VMware Tanzu Spring** step by step. It answers questions from documentation, creates support tickets, remembers the conversation, reaches external services over MCP, finds its own tools, and finally uses experimental agentic patterns such as skills and a human in the loop. Each module pairs theory chapters with practical labs, so you understand *why* before you build.
+
+The content is based on a free, [interactive workshop at Spring Academy](https://spring-staging.academy/courses/spring-ai-intro/).
 
 Built on **Spring AI 2.0**, **Spring Boot 4.1**, and **Java 21**.
 
 ## Prerequisites
 
 **Tooling**
-- **JDK 21** (the sample apps target `java.version=21`).
-- A code editor or IDE (IntelliJ IDEA, VS Code, …).
-- **Maven** — each sample app ships the Maven Wrapper (`./mvnw`), so no separate install is required.
-- **Docker** (optional) — used from the production-ready module onward for PostgreSQL/pgvector and the observability stack via each app's `compose.yaml`.
-- `curl` (or any HTTP client) to exercise the endpoints.
 
-**A model provider** — the labs use **OpenAI**. Set your key in the terminal you run an app in:
+- **JDK 21** or newer. The sample apps target `java.version=21`.
+- A code editor or IDE, such as IntelliJ IDEA or VS Code.
+- **Maven** is not needed separately, because each sample app ships the Maven Wrapper (`./mvnw`).
+- **Docker** for the observability lab (Grafana stack) and the MCP security part (Keycloak). Both run through the `compose.yaml` of the app.
+- `curl` to call the endpoints, and [`jq`](https://jqlang.org) for readable JSON output in some labs.
+
+**A model provider.** The labs use **OpenAI** with the `gpt-5.6-sol` chat model and the `text-embedding-3-small` embedding model. Set your key in the terminal where you run an app.
 
 ```bash
 export OPENAI_API_KEY=sk-...
@@ -23,83 +26,36 @@ To use another provider, swap the Spring AI starter dependency and the `spring.a
 
 ## How the Workshop Is Structured
 
-The repository mirrors the course's learning modules. Work through them in order — each lab builds directly on the application state left by the previous one.
+The repository follows the learning modules of the course. Work through them in order, because each lab builds on the application state that the previous one left behind.
 
-```
-spring-ai-workshop/
-├── README.md                        ← you are here
-├── APPENDIX-spring-ai-1.1-vs-2.0.md ← reference: upgrading 1.1 → 2.0
-│
-├── 00-intro/
-│   └── intro.md                     ← what Spring AI is and what you'll build
-│
-├── 01-fundamentals/                 ← Module 1
-│   ├── ai-fundamentals.md           │  theory: how LLMs work
-│   ├── spring-ai-fundamentals.md    │  theory: ChatModel, ChatClient, structured output
-│   ├── advisors.md                  │  theory: the advisor pattern
-│   ├── exercises.md                 │  hands-on lab
-│   └── sample-app/                  ┘  starting code for the lab
-│
-├── 02-advanced-patterns/            ← Module 2
-│   ├── foundations.md               ← theory: RAG & tool-calling foundations
-│   ├── rag/                         ┐  RAG lab
-│   │   ├── rag.md                   │  theory
-│   │   ├── exercises.md             │  hands-on
-│   │   └── sample-app/              ┘  starting code
-│   └── tool-calling/                ┐  tool-calling lab
-│       ├── tool-calling.md          │
-│       ├── exercises.md             │
-│       └── sample-app/              ┘
-│
-├── 03-production-ready-features/    ← Module 3
-│   ├── testing/                     ┐  testing lab (theory + exercises + app)
-│   │   └── …                        ┘
-│   └── observability/               ┐  observability lab
-│       └── …                        ┘
-│
-├── 04-agentic-ai/                   ← Module 4
-│   ├── agentic-ai-fundamentals.md   ← theory: agents vs. workflows
-│   ├── mcp/                         ┐  MCP lab
-│   │   └── …                        ┘
-│   └── agentic-patterns/            ┐  agentic-patterns lab (+ spring-releases-mcp-server)
-│       └── …                        ┘
-│
-└── 99-summary/                      ← recap + consolidated final sample-app
-    ├── summary.md
-    ├── sample-app/
-    └── spring-releases-mcp-server/
-```
+Each lab folder follows the same layout.
 
-Each lab folder follows the same layout:
+- **Theory chapters (`*.md`)** explain the concepts and the relevant Spring AI APIs in prose, with code snippets and diagrams. Read them first.
+- **`exercises.md`** is the lab. It is written for self paced learning. Each step says which file to create or change and gives you the code to copy. Java changes always show the complete file, so you can replace the whole content without looking for the right place or a missing import. Between the steps you call the application with `curl` and look at the result.
+- **`sample-app/`** is a runnable Spring Boot application and the starting point of the lab. It carries the support assistant forward, so it already contains everything you built in the earlier labs. In other words, the `sample-app/` of a lab is the solution of the previous lab. If you get stuck, compare your code with it or continue from there.
 
-- **`*.md` theory chapters** — read these first. They explain the concepts and the relevant Spring AI APIs in prose, with code snippets. Multi-topic modules split the theory into topic-named files (`ai-fundamentals.md`, `advisors.md`, `rag.md`, …).
-- **`exercises.md`** — the hands-on lab. A series of small, incremental changes (edit, restart, `curl`, observe) that apply the theory to the `sample-app`.
-- **`sample-app/`** — a self-contained, runnable Spring Boot application. It carries the support assistant forward, so each lab's app already contains everything you built in the earlier labs. In other words, a lab's `sample-app` is roughly the *solution* of the previous lab.
-
-The `00-intro` module is theory only. `99-summary` ties it all together with the finished application.
+The `00-intro` module is theory only. `99-summary` ties it all together with the finished applications.
 
 ## Content Overview
 
 | Module | Topic | What you add to the assistant |
 |--------|-------|-------------------------------|
-| **00** | Introduction | What Spring AI is and what you'll build |
-| **01** | Fundamentals | `ChatModel` / `ChatClient`, prompts & templates, streaming, structured (type-safe) output, and the advisor pattern (logging, memory) |
-| **02** | Advanced patterns | RAG (embeddings, a `VectorStore`, the ETL pipeline, the `QuestionAnswerAdvisor`) and tool calling (`@Tool` methods run by the `ToolCallingAdvisor`) |
-| **03** | Production-ready features | Testing (mocking the model, evaluators) and observability (metrics, tracing, token-usage/cost via Micrometer/Actuator) |
-| **04** | Agentic AI | The Model Context Protocol (consume and expose tools) and agentic patterns (the Tool Search Tool for many-tool agents) |
-| **99** | Summary | A recap and the consolidated final application |
-
-> **Reference:** [`APPENDIX-spring-ai-1.1-vs-2.0.md`](APPENDIX-spring-ai-1.1-vs-2.0.md) summarizes the main features and breaking changes when moving from Spring AI 1.1 to 2.0.
+| **00** | Introduction | What Spring AI is and what you build |
+| **01** | Fundamentals | `ChatModel` and `ChatClient`, prompts and templates, streaming, structured output, and advisors for logging and conversation memory |
+| **02** | Advanced patterns | RAG with embeddings, a `VectorStore`, the ETL pipeline, and the `QuestionAnswerAdvisor`, then tool calling with `@Tool` methods |
+| **03** | Production ready features | Testing with semantic assertions and an LLM as judge, and observability with metrics, token usage, and traces in Grafana |
+| **04** | Agentic AI | MCP servers and clients secured with OAuth 2.0, the Tool Search Tool for many tools, experimental patterns (evaluator optimizer, Agent Skills, plan and execute, human in the loop), and the Agent2Agent protocol |
+| **99** | Summary | A recap and the finished applications |
 
 ## Getting Started
 
-1. Ensure the prerequisites above are in place (JDK 21 and a key for your chosen provider).
+1. Make sure the prerequisites above are in place, especially JDK 21 and your OpenAI key.
 2. Read [`00-intro/intro.md`](00-intro/intro.md), then the theory chapters in [`01-fundamentals`](01-fundamentals/).
-3. Start the first lab by following [`01-fundamentals/exercises.md`](01-fundamentals/exercises.md).
-4. Run a lab's app from its `sample-app/` directory:
+3. Start the first lab with [`01-fundamentals/exercises.md`](01-fundamentals/exercises.md).
+4. Run the app of a lab from its `sample-app/` folder.
    ```bash
    cd 01-fundamentals/sample-app
    export OPENAI_API_KEY=sk-...
    ./mvnw spring-boot:run
    ```
-5. Work through the modules in order, carrying the assistant forward to `99-summary`.
+5. Work through the modules in order until you reach [`99-summary`](99-summary/summary.md).

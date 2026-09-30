@@ -1,0 +1,20 @@
+services:
+  authorization-server:
+    image: quay.io/keycloak/keycloak:26.4
+    container_name: spring-releases-mcp-server-keycloak
+    command: ["start-dev", "--import-realm"]
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      KC_HEALTH_ENABLED: "true"
+    volumes:
+      - ./keycloak-realm.json:/opt/keycloak/data/import/realm.json:ro
+    ports:
+      - "5556:8080"
+    healthcheck:
+      test: ["CMD", "bash", "-c", "exec 3<>/dev/tcp/127.0.0.1/8080 && printf 'GET /realms/spring/protocol/openid-connect/certs HTTP/1.1\\r\\nHost: localhost\\r\\nConnection: close\\r\\n\\r\\n' >&3 && grep -q '\"keys\"' <&3"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    profiles:
+      - mcp-security

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 680" font-family="'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0.5,0.5 L8,4 L0.5,7.5" fill="none" stroke="#7a8896" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="2000" height="680" fill="#ffffff"/>
+
+  <!-- ===== Connections (drawn first, behind boxes) ===== -->
+  <g stroke="#7a8896" stroke-width="3" fill="none" stroke-linecap="round" marker-end="url(#arrow)">
+    <path d="M210,310 C300,310 320,135 420,135"/>
+    <path d="M210,320 L420,320"/>
+    <path d="M210,330 C300,330 320,505 420,505"/>
+
+    <path d="M840,135 C960,135 980,320 1080,320"/>
+    <path d="M840,320 L1080,320"/>
+    <path d="M840,505 C960,505 980,320 1080,320"/>
+
+    <path d="M1440,320 L1790,320"/>
+  </g>
+
+  <!-- Flow label -->
+  <text x="630" y="645" text-anchor="middle" font-size="25" font-weight="600" fill="#7a8896">Run at the same time</text>
+
+  <!-- ===== In and Out ===== -->
+  <rect x="60" y="265" width="150" height="110" rx="10" fill="#eef1f4"/>
+  <text x="135" y="330" text-anchor="middle" font-size="28" font-weight="700" fill="#5b6b7a">In</text>
+
+  <rect x="1790" y="265" width="150" height="110" rx="10" fill="#eef1f4"/>
+  <text x="1865" y="330" text-anchor="middle" font-size="28" font-weight="700" fill="#5b6b7a">Out</text>
+
+  <!-- ===== Parallel model calls ===== -->
+  <g>
+    <rect x="420" y="60" width="420" height="150" rx="16" fill="#e3eef5" stroke="#2b6a8f" stroke-width="3"/>
+    <text x="630" y="125" text-anchor="middle" font-size="32" font-weight="700" fill="#1c3d5a">LLM Call 1</text>
+    <text x="630" y="165" text-anchor="middle" font-size="25" fill="#5b6b7a">Impact on customers</text>
+
+    <rect x="420" y="245" width="420" height="150" rx="16" fill="#e3eef5" stroke="#2b6a8f" stroke-width="3"/>
+    <text x="630" y="310" text-anchor="middle" font-size="32" font-weight="700" fill="#1c3d5a">LLM Call 2</text>
+    <text x="630" y="350" text-anchor="middle" font-size="25" fill="#5b6b7a">Impact on employees</text>
+
+    <rect x="420" y="430" width="420" height="150" rx="16" fill="#e3eef5" stroke="#2b6a8f" stroke-width="3"/>
+    <text x="630" y="495" text-anchor="middle" font-size="32" font-weight="700" fill="#1c3d5a">LLM Call 3</text>
+    <text x="630" y="535" text-anchor="middle" font-size="25" fill="#5b6b7a">Impact on investors</text>
+  </g>
+
+  <!-- ===== Aggregator (your code) ===== -->
+  <rect x="1080" y="245" width="360" height="150" rx="16" fill="#ffffff" stroke="#6aa84f" stroke-width="3"/>
+  <text x="1260" y="310" text-anchor="middle" font-size="32" font-weight="700" fill="#1c3d5a">Aggregator</text>
+  <text x="1260" y="350" text-anchor="middle" font-size="25" fill="#5b6b7a">Combine the results</text>
+</svg>

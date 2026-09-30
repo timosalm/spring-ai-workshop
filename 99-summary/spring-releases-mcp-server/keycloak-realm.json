@@ -1,0 +1,46 @@
+{
+  "realm": "spring",
+  "enabled": true,
+  "sslRequired": "none",
+  "users": [
+    {
+      "username": "alice",
+      "enabled": true,
+      "email": "alice@jon.es",
+      "emailVerified": true,
+      "firstName": "Alice",
+      "lastName": "Jones",
+      "realmRoles": [
+        "default-roles-spring"
+      ],
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password",
+          "temporary": false
+        }
+      ]
+    }
+  ],
+  "components": {
+    "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy": [
+      {
+        "name": "Trusted Hosts",
+        "providerId": "trusted-hosts",
+        "subType": "anonymous",
+        "subComponents": {},
+        "config": {
+          "trusted-hosts": [
+            "localhost"
+          ],
+          "host-sending-registration-request-must-match": [
+            "false"
+          ],
+          "client-uris-must-match": [
+            "true"
+          ]
+        }
+      }
+    ]
+  }
+}

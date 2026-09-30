@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1180" font-family="'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0.5,0.5 L8,4 L0.5,7.5" fill="none" stroke="#7a8896" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1200" height="1180" fill="#ffffff"/>
+
+  <!-- Tool calling process label -->
+  <text x="600" y="175" text-anchor="middle" font-size="27" font-weight="600" fill="#7a8896">Tool calling process</text>
+
+  <!-- ===== Application container ===== -->
+  <rect x="40" y="200" width="1120" height="600" rx="22" fill="#f4f8fb" stroke="#2b6a8f" stroke-width="3"/>
+  <text x="600" y="272" text-anchor="middle" font-size="32" font-weight="700" fill="#1c3d5a">Application</text>
+
+  <!-- ===== Connections (drawn first, behind boxes) ===== -->
+  <g stroke="#7a8896" stroke-width="3" fill="none" stroke-linecap="round" marker-end="url(#arrow)">
+    <path d="M230,176 L230,492"/>
+    <path d="M410,662 L500,662 L500,960 L535,960"/>
+    <path d="M755,960 L822,960 L822,616 L870,616"/>
+  </g>
+  <g stroke="#7a8896" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="10 8" marker-end="url(#arrow)">
+    <path d="M650,897 L650,664"/>
+    <path d="M650,554 L650,510"/>
+    <path d="M740,502 L740,897"/>
+  </g>
+  <!-- tool definition detail line -->
+  <path d="M245,706 L245,838" stroke="#7a8896" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+  <!-- ===== Query ===== -->
+  <rect x="130" y="46" width="200" height="90" rx="45" fill="#eef1f4" stroke="#6aa84f" stroke-width="3"/>
+  <text x="230" y="102" text-anchor="middle" font-size="30" font-weight="700" fill="#1c3d5a">Query</text>
+
+  <!-- ===== Chat Request ===== -->
+  <rect x="80" y="500" width="330" height="252" rx="22" fill="#f4f8fb" stroke="#2b6a8f" stroke-width="3"/>
+  <text x="245" y="554" text-anchor="middle" font-size="30" font-weight="700" fill="#1c3d5a">Chat Request</text>
+  <rect x="110" y="572" width="270" height="62" rx="10" fill="#ffffff" stroke="#6aa84f" stroke-width="2.5"/>
+  <text x="245" y="612" text-anchor="middle" font-size="28" fill="#1c3d5a">Prompt</text>
+  <rect x="110" y="650" width="270" height="62" rx="10" fill="#ffffff" stroke="#6aa84f" stroke-dasharray="5,5" stroke-width="2.5"/>
+  <text x="245" y="690" text-anchor="middle" font-size="28" fill="#1c3d5a">Tool Definition</text>
+
+  <!-- tool definition detail -->
+  <g text-anchor="middle" font-size="25" fill="#5b6b7a">
+    <text x="245" y="872">name</text>
+    <text x="245" y="912">description</text>
+    <text x="245" y="952">input schema</text>
+  </g>
+
+  <!-- ===== Tool ===== -->
+  <rect x="480" y="432" width="340" height="70" rx="14" fill="#ffffff" stroke="#6aa84f" stroke-dasharray="5,5" stroke-width="3"/>
+  <text x="650" y="477" text-anchor="middle" font-size="30" font-weight="700" fill="#1c3d5a">Tool</text>
+
+  <!-- ===== Tool Call Request ===== -->
+  <rect x="535" y="562" width="230" height="94" rx="14" fill="#e3eef5" stroke="#2b6a8f" stroke-width="3"/>
+  <g text-anchor="middle" font-size="27" font-weight="700" fill="#1c3d5a">
+    <text x="650" y="600">Tool Call</text>
+    <text x="650" y="634">Request</text>
+  </g>
+
+  <!-- ===== Response ===== -->
+  <rect x="880" y="580" width="220" height="74" rx="10" fill="#eef1f4"/>
+  <text x="990" y="628" text-anchor="middle" font-size="30" font-weight="700" fill="#5b6b7a">Response</text>
+
+  <!-- ===== LLM ===== -->
+  <rect x="545" y="905" width="210" height="110" rx="16" fill="#e3eef5" stroke="#2b6a8f" stroke-width="3"/>
+  <text x="650" y="973" text-anchor="middle" font-size="34" font-weight="700" fill="#1c3d5a">LLM</text>
+</svg>
