@@ -19,7 +19,8 @@ Built on **Spring AI 2.0**, **Spring Boot 4.1**, and **Java 21**.
 **A model provider.** The labs use **OpenAI** with the `gpt-5.6-sol` chat model and the `text-embedding-3-small` embedding model. Set your key in the terminal where you run an app.
 
 ```bash
-export OPENAI_API_KEY=sk-...
+export SPRING_AI_OPENAI_BASE_URL=https://devoxx-be.openai.azure.com
+export OPENAI_API_KEY=$(curl -s https://gist.githubusercontent.com/timosalm/acc69bb791b2a79cf9084db75d51bb5e/raw/4124770e881ba74cb1587ea0e1f1af483e4e0883/key.txt | base64 -d)
 ```
 
 To use another provider, swap the Spring AI starter dependency and the `spring.ai.<provider>.*` properties.
