@@ -99,8 +99,10 @@ Whether the model completes the action depends on the model. The search for tool
 Now run a conversation with two turns that reuses the same id.
 
 ```bash
-CID=$(uuidgen)
+CID=$(uuidgen) # if uuidgen is not available, just use a random string, e.g. CID=test
+```
 
+```bash
 curl -G "http://localhost:8080/api/v1/chat" -H "X-Conversation-Id: $CID" \
      --data-urlencode "query=What is the latest release of Spring Boot? Please look it up."
 
