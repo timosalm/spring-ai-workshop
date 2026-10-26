@@ -1,10 +1,12 @@
-# Building AI Applications with Spring AI
+# Building AI Agents with Spring AI
 
 A hands-on workshop for Java developers. Over a series of modules you build a **support assistant for VMware Tanzu Spring** step by step. It answers questions from documentation, creates support tickets, remembers the conversation, reaches external services over MCP, finds its own tools, and finally uses experimental agentic patterns such as skills and a human in the loop. Each module pairs theory chapters with practical labs, so you understand *why* before you build.
 
 The content is based on a free, [interactive workshop at Spring Academy](https://spring-staging.academy/courses/spring-ai-intro/).
 
 Built on **Spring AI 2.0**, **Spring Boot 4.1**, and **Java 21**.
+
+[Slides: Building AI Agents with Spring AI](docs/slides.pdf)
 
 ## Prerequisites
 
