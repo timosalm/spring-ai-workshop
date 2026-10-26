@@ -6,7 +6,7 @@ The content is based on a free, [interactive workshop at Spring Academy](https:/
 
 Built on **Spring AI 2.0**, **Spring Boot 4.1**, and **Java 21**.
 
-[Slides: Building AI Agents with Spring AI](docs/slides.pdf)
+[Slides: Building AI Agents with Spring AI](slides.pdf)
 
 ## Prerequisites
 
